@@ -1,40 +1,35 @@
+import { ipcRenderer } from "electron";
 import React from "react";
-import { Component } from "react";
-import { Todos , Tod} from "./../../utils/Types";
-const { ipcRenderer } = window.require("electron");
+import {Component} from 'react'
 
 
-class MainWindow extends Component {
-  state: typeof Todos = {
-    todos: [],
-  };
-  componentDidMount() {
-    ipcRenderer.send("todo:list");
-    ipcRenderer.on("todo:list", (_event: any, data: typeof Todos) => {
-      this.setState({ todos: data });
-    });
-    ipcRenderer.on("todo:add", (_event: any, data: typeof Tod) => {
-      if (Array.isArray(this.state.todos)) {
-        this.setState({ todos: [...this.state.todos, data] });
-      } else {
-        console.log('arr variable does not store an array');
-      }
-      
-    });
-    ipcRenderer.on("todo:clear", (_event: any) => {
-      this.setState({ todos: [] });
-    });
-  }
-  renderTodos = () => {
-    return this?.state?.todos?.map((todo) => <li key={todo.id}>{todo.text}</li>) ;
-  };
-  render() {
-    return (
-      <div>
-        <h1>Todos</h1>
-        <ul>{this.renderTodos()}</ul>
-      </div>
-    );
-  }
+
+class MainWindow extends Component{ 
+    state ={
+        msgFromMainProcess :''
+    };
+
+    componentDidMount(){
+        ipcRenderer.on('event',(event, data)=>{
+            this.setState({msgFromMainProcess :data.msg})
+        })
+    }
+
+    onButtonclick(){
+        ipcRenderer.send('categories:get', {})
+    }
+
+    render(){
+        return (
+            <div>
+                <h1>Hello to Electron</h1>
+                <p>Comunicate with Main Process</p>
+            </div>
+        )
+    }
+
+
 }
+
+
 export default MainWindow;

@@ -18,6 +18,7 @@ export let Values :{
 
 
 
+export const START_FETCHING_CATEGORIES = 'START_FETCHING_CATEGORIES';
 
 
 

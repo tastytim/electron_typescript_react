@@ -8,9 +8,11 @@ import fs from 'fs';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+const MOVIES_PATH = path.join(__dirname , 'public','movie');
 let mainWindow: BrowserWindow | null;
 let addToDoWindow: BrowserWindow | null;
 let todos: typeof Tod[] = [];
+let categories = [];
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -141,3 +143,14 @@ ipcMain.on("todo:add", (event, data: typeof Tod) => {
 ipcMain.on("todo:clear", (event) => {
   todos = [];
 });
+
+
+
+ipcMain.on('categories:get', (event, data)=>{
+  fs.readdir(MOVIES_PATH, function(err, items){
+    categories = items;
+    console.log();
+    mainWindow.webContents.send('categories:list',categories);
+  })
+  mainWindow.webContents.send('list:')
+})
