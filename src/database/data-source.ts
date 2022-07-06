@@ -1,9 +1,9 @@
 import { DataSource } from "typeorm";
-import { User } from "./User/User";
+import { User } from "../entities/User";
 
 export const AppDataSource = new DataSource({
     type: "sqlite",
-    database: "./gedip.sqlite",
+    database: "gedip.sqlite",
     // synchronize: false,
     logging: true,
     logger:'advanced-console',
