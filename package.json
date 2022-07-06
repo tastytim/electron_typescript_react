@@ -9,7 +9,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "rebuild": "electron-rebuild -f -w sqlite3"
   },
   "keywords": [],
   "author": {
@@ -69,6 +70,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
     "@electron-forge/maker-zip": "^6.0.0-beta.64",
     "@electron-forge/plugin-webpack": "6.0.0-beta.64",
+    "@types/node": "^18.0.1",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@types/uuid": "^8.3.4",
@@ -77,6 +79,7 @@
     "@vercel/webpack-asset-relocator-loader": "1.7.0",
     "css-loader": "^6.0.0",
     "electron": "19.0.6",
+    "electron-rebuild": "^3.2.7",
     "eslint": "^8.0.1",
     "eslint-plugin-import": "^2.25.0",
     "fork-ts-checker-webpack-plugin": "^7.2.1",
@@ -86,10 +89,14 @@
     "typescript": "~4.5.4"
   },
   "dependencies": {
+    "electron-log": "^4.4.8",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.8",
+    "typeorm": "^0.3.7"
   }
 }
