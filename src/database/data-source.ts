@@ -3,10 +3,10 @@ import { User } from "../entities/User";
 
 export const AppDataSource = new DataSource({
     type: "sqlite",
-    database: "gedip.sqlite",
+    database: "./gedip.sqlite",
     // synchronize: false,
     logging: true,
-    logger:'advanced-console',
+    logger: 'advanced-console',
     entities: [User],
     // subscribers: [],
     // migrations: []
@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
 
 
 
-AppDataSource.initialize().then(async ()=>{
+AppDataSource.initialize().then(async () => {
     console.log("DB INITIALISED")
 })
-.catch((error)=>console.log(error));
+    .catch((error) => console.log(error));

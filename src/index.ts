@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, Menu } from "electron";
 import log from 'electron-log';
+import path from "path";
 // import {getUsers} from './database/models/testmanager'
 import "reflect-metadata"
 import {AppDataSource} from './database/data-source'
@@ -24,7 +25,7 @@ const createWindow = (): void => {
     width: 800,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation:true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
   });
@@ -42,6 +43,7 @@ app.on("ready", ()=>{
   AppDataSource
   // OPEN ELECTRON
   createWindow()
+  
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -61,14 +63,22 @@ app.on("activate", () => {
   }
 });
 
+ipcMain.handle('get-users', async(event)=>{
+  console.log('RECEIVED MESSAGE FROM REACT')
 
-// COMMUNICAZIONE CON REACT
-ipcMain.on('users:list', async(event)=>{
   const usersRepository = AppDataSource.getRepository(User);
   const users = await usersRepository.find();
-
   console.log(users)
-  log.info('I DATI DA PASSARE' ,users)
-     mainWindow.webContents.send('users:list', users);
-});
+  return users;
+})
+
+// COMMUNICAZIONE CON REACT
+// ipcMain.handle('get-users', async(event)=>{
+//   const usersRepository = AppDataSource.getRepository(User);
+//   const users = await usersRepository.find();
+
+//   console.log(users)
+//   log.info('I DATI DA PASSARE' ,users)
+//      mainWindow.webContents.send('users:list', users);
+// });
 

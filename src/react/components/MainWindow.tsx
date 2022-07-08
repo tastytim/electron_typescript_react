@@ -1,49 +1,32 @@
-import { ipcRenderer } from "electron";
-import React from "react";
 
-class MainWindow extends React.Component<{}, UsersArray>{ 
-    constructor(props:any){
-        super(props);
-        this.state = {
-           users : []
+import React from 'react'
+import { Routes, Route} from 'react-router-dom'
+import Anagrafica from './Anagrafica'
+import Dashboard from './Dashboard'
+import Impostazioni from './Impostazioni'
+
+export default function MainWindow() {
+
+    const routes = [
+        {
+            path:'*',
+            element: Dashboard
+        },
+        {
+            path:'anagrafica',
+            element: Anagrafica
+        },
+        {
+            path:'impostazioni',
+            element:Impostazioni
         }
-    }
-    
-    async componentDidMount(){
-        ipcRenderer.send('users:list',{});
-        ipcRenderer.on('users:list', (event,data)=>{
-            console.log(data)
-            this.setState( {users :  data});
-        })
-    }
-
-    onButtonclick(){
-        console.log('SENT')
-        ipcRenderer.send('users:list',{});
-    
-    }
-  
-
-    usersRenderer = () =>{
-        return this.state.users.map(user=><div key={user.id} >{user.name}</div>)
-        }
-    
-    render(){
-        
-        return (
-            <div>
-                <h1>Hello to Electron</h1>
-
-               <button onClick={()=>this.onButtonclick()}>GetUsers</button>
-               <h1>Users</h1>
-               <div>
-                
-                {this.usersRenderer()}
-               </div>
-            </div>
-        )
-    }
+    ]
+    return (
+        <Routes>
+            {routes.map((e, i)=>(
+                <Route key={i} path={e.path} element={<e.element/>}></Route> 
+            ))}
+            <Route path='/' element={<Anagrafica/>}></Route>
+        </Routes>
+    )
 }
-
-
-export default MainWindow;

@@ -18,3 +18,12 @@ export global  {
         users : User[]
     }
 }
+
+
+export global {
+    interface Window {
+      electron: {
+        doThing(): void;
+      }
+    }
+  }

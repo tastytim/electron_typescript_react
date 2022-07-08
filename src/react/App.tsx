@@ -1,18 +1,20 @@
 
+import Navbar from '../react/components/Navbar'
 import React from 'react';
+import { Box } from '@mui/material';
 import MainWindow from './components/MainWindow';
-import Reacttest from './components/Reacttest'
 
 
-function App(){
-   
-    return <div>
-         <MainWindow/>
-      
-    </div> 
-    
-   
-}
+
+function App() {
+    return (
+        <Box>
+            <Navbar />
+            <MainWindow />
+        </Box>
+    )
+} export default App;
 
 
-export default App;
+
+
