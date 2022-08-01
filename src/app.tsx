@@ -9,8 +9,6 @@ import { theme } from './styles/theme'
 import { BrowserRouter as Router } from "react-router-dom";
 
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
@@ -18,7 +16,6 @@ root.render(
     <ThemeProvider theme={theme}>
       <Router>
       <App />
-
       </Router>
     </ThemeProvider>
   </Provider>

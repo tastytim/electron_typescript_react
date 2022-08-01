@@ -56,9 +56,8 @@
                   "js": "./src/renderer.ts",
                   "name": "main_window",
                   "preload": {
-                    "js":"./src/preload.ts"
-                    }
-                  
+                    "js": "./src/preload.ts"
+                  }
                 }
               ]
             }
@@ -85,6 +84,7 @@
     "@vercel/webpack-asset-relocator-loader": "1.7.0",
     "css-loader": "^6.0.0",
     "electron": "19.0.6",
+    "electron-react-devtools": "^0.5.3",
     "electron-rebuild": "^3.2.7",
     "eslint": "^8.0.1",
     "eslint-plugin-import": "^2.25.0",

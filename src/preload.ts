@@ -12,9 +12,7 @@ contextBridge.exposeInMainWorld('api',{
 
 
     async getUsers():Promise<any>{
-        console.log('preload users sent message')
         const users  = await ipcRenderer.invoke('get-users')
-        console.log('PRELOAD' , users)
         return users;
     },
     async getUserById(id:number):Promise<User>{

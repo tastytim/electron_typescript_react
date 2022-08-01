@@ -1,4 +1,5 @@
-import { createSlice , createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice , current } from "@reduxjs/toolkit";
+import { Action } from "history";
 
 
 type User = {
@@ -7,28 +8,29 @@ type User = {
 }
 
 type USER_INITIAL_STATE = {
-    users: User[]
+    users: User[],
+    test:String
 }
 
 const initialState : USER_INITIAL_STATE = {
-    users : []
+    users : [],
+    test:'hello'
 }
 
 export const getUsersThunk = async (dispatch:any) => {
-    console.log('DISPATCH')
        const users = await window.api.getUsers()
        await dispatch(getUsers(users));
 }
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState,
+    initialState ,
     reducers:{
-        getUsers:(state,action)=>{
-            state.users = action.payload
+        getUsers:(state = initialState,action)=>{
+           state.users = action.payload;
         },
         getUserById:(state,action)=>{
-
+           
         },
         addUser:(state,action)=>{
 
